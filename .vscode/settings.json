@@ -1,0 +1,17 @@
+{
+    "ruff.path": [
+        ".venv/bin/ruff"
+    ],
+    "ruff.interpreter": [
+        ".venv/bin/python"
+    ],
+    "python.defaultInterpreterPath": ".venv/bin/python",
+    "mise.configureExtensionsAutomaticallyIgnoreList": [
+        "ms-python.python"
+    ],
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

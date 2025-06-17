@@ -1,0 +1,98 @@
+[project]
+name = "s3-share"
+version = "0.1.0"
+description = "CLI tool for sharing files via Amazon S3 with presigned URLs"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+keywords = ["aws", "s3", "file-sharing", "upload", "compression", "presigned-url", "cli"]
+authors = [
+  { name = "Dennis Conrad", email = "dennis.conrad@cloudinental.com" },
+]
+classifiers = [
+    "Development Status :: 4 :: Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Communications :: File Sharing",
+    "Topic :: System :: Archiving :: Compression",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "boto3>=1.38.32",
+    "click>=8.2.1",
+    "tomli>=2.2.1; python_version < '3.11'",
+]
+
+[project.urls]
+Homepage = "https://github.com/dennisconrad/s3-share"
+Issues = "https://github.com/dennisconrad/s3-share/issues"
+Documentation = "https://github.com/dennisconrad/s3-share#readme"
+Source = "https://github.com/dennisconrad/s3-share"
+
+
+
+
+[dependency-groups]
+dev = [
+    "moto[s3]>=5.1.5",
+    "mypy-boto3-s3>=1.38.26",
+    "pytest>=8.4.0",
+    "pytest-cov>=6.1.1",
+    "pytest-mock>=3.14.1",
+    "ruff>=0.11.13",
+]
+
+[project.scripts]
+s3-share = "s3_share.cli:main"
+
+[tool.uv]
+python-downloads = "automatic"
+python-preference = "managed"
+
+[build-system]
+requires = ["uv_build>=0.7.12,<0.8.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--cov=s3_share",
+    "--cov-report=term-missing",
+]
+testpaths = ["tests/"]
+pythonpath = ["src/"]
+
+[tool.ruff]
+line-length = 120
+fix = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint]
+select = [
+    "F401",  # Unused import
+    "F403",  # 'from module import *' used; unable to detect undefined names
+    "F405",  # Name may be undefined, or defined from star imports: module
+    "F841",  # Local variable is assigned to but never used
+    "E501",  # Line too long
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+]
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+split-on-trailing-comma = false
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
