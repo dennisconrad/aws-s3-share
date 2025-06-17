@@ -20,7 +20,7 @@ Compressed archives are uploaded with a random 12-characters long prefix to avoi
 ### Using uv (recommended)
 
 ```bash
-uv add aws-s3-share
+uvx aws-s3-share
 ```
 
 ### Using pipx
