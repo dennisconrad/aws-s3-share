@@ -3,8 +3,8 @@ import queue
 import threading
 from pathlib import Path
 
-from s3_share.coordinator import Coordinator
-from s3_share.upload import S3UploadPartResponse
+from aws_s3_share.coordinator import Coordinator
+from aws_s3_share.upload import S3UploadPartResponse
 
 
 class MockCompressor:

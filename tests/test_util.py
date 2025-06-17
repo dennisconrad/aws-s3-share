@@ -6,15 +6,15 @@ from unittest.mock import Mock
 import string
 from botocore.exceptions import ClientError
 
-from s3_share.util import (
+from aws_s3_share.util import (
     get_compressor_for_path, 
     get_s3_client, 
     validate_and_resolve_input_path,
     generate_random_prefix,
     generate_s3_presigned_url
 )
-from s3_share.compress import GzipCompressor, TarGzipCompressor
-from s3_share.errors import AWSClientProfileNotFoundError, InputPathValidationError, S3PresignedURLError
+from aws_s3_share.compress import GzipCompressor, TarGzipCompressor
+from aws_s3_share.errors import AWSClientProfileNotFoundError, InputPathValidationError, S3PresignedURLError
 
 
 class TestGetS3Client:

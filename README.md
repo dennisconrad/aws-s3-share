@@ -1,6 +1,6 @@
-# s3-share
+# aws-s3-share
 
-![PyPI - Version](https://img.shields.io/pypi/v/s3-share) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/s3-share) ![PyPI - License](https://img.shields.io/pypi/l/s3-share)
+![PyPI - Version](https://img.shields.io/pypi/v/aws-s3-share) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/aws-s3-share) ![PyPI - License](https://img.shields.io/pypi/l/aws-s3-share)
 
 A command-line tool for compressing files or directories, uploading them to Amazon S3, then generating a pre-signed URL for easy sharing.  This is useful for example for uploading/downloading files from EC2 instances without direct connexion to the Internet.
 
@@ -20,19 +20,19 @@ Compressed archives are uploaded with a random 12-characters long prefix to avoi
 ### Using uv (recommended)
 
 ```bash
-uv add s3-share
+uv add aws-s3-share
 ```
 
 ### Using pipx
 
 ```bash
-pipx install s3-share
+pipx install aws-s3-share
 ```
 
 ### Using pip
 
 ```bash
-pip install s3-share
+pip install aws-s3-share
 ```
 
 ## Quick Start
@@ -41,21 +41,21 @@ pip install s3-share
 
 ```bash
 # Upload a file
-s3-share --bucket my-bucket myfile.txt
+aws-s3-share --bucket my-bucket myfile.txt
 
 # Upload a directory
-s3-share --bucket my-bucket mydirectory/
+aws-s3-share --bucket my-bucket mydirectory/
 
 # Specify expiry time (in seconds)
-s3-share  --bucket my-bucket --expiry 7200 myfile.txt
+aws-s3-share  --bucket my-bucket --expiry 7200 myfile.txt
 
 # Specify an AWS profile
-s3-share --bucket my-bucket --profile myprofile myfile.txt
+aws-s3-share --bucket my-bucket --profile myprofile myfile.txt
 ```
 
 ## Configuration
 
-s3-share supports command-line arguments and reading its options from a configuration file (`~/.config/s3-share.toml` on Linux/macOS, `%AppData%\Roaming\s3-share.toml` on Windows).  Valid configuration file options are `bucket`, `expiry`, and `profile`.
+aws-s3-share supports command-line arguments and reading its options from a configuration file (`~/.config/aws-s3-share.toml` on Linux/macOS, `%AppData%\Roaming\aws-s3-share.toml` on Windows).  Valid configuration file options are `bucket`, `expiry`, and `profile`.
 
 Options are applied in this order of precedence:
 
@@ -66,7 +66,7 @@ Options are applied in this order of precedence:
 ### Command-line Options
 
 ```bash
-s3-share [OPTIONS] PATH
+aws-s3-share [OPTIONS] PATH
 
 Options:
   -b, --bucket TEXT     S3 bucket to upload to
@@ -78,7 +78,7 @@ Options:
 
 ### AWS Credentials
 
-If neither the command-line argument `--profile` nor the configuration file option `profile` is provided, s3-share uses the standard AWS credential chain:
+If neither the command-line argument `--profile` nor the configuration file option `profile` is provided, aws-s3-share uses the standard AWS credential chain:
 
 1. Environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`)
 2. AWS credentials file (`~/.aws/credentials`)

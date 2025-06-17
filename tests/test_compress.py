@@ -9,13 +9,13 @@ from unittest.mock import Mock, patch, mock_open
 import math
 import pytest
 
-from s3_share.compress import (
+from aws_s3_share.compress import (
     GzipCompressor,
     TarGzipCompressor,
     ChunkWriter,
     DEFAULT_CHUNK_SIZE,
 )
-from s3_share.errors import CompressorCalculateTotalSizeError, CompressorInputPathError
+from aws_s3_share.errors import CompressorCalculateTotalSizeError, CompressorInputPathError
 
 
 

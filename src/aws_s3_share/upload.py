@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, TypedDict
 
-from s3_share.errors import S3UploadMultipartError
+from aws_s3_share.errors import S3UploadMultipartError
 
 if TYPE_CHECKING:  # pragma: no cover
     from mypy_boto3_s3 import S3Client

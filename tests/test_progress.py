@@ -3,7 +3,7 @@ import threading
 import time
 from unittest.mock import Mock, patch, MagicMock
 
-from s3_share.progress import ProgressReporter, ClickProgressReporter
+from aws_s3_share.progress import ProgressReporter, ClickProgressReporter
 
 
 class MockProgressReporter(ProgressReporter):
@@ -93,7 +93,7 @@ class TestClickProgressReporter:
         assert reporter._lock is not None
         assert isinstance(reporter._lock, type(threading.RLock()))
     
-    @patch('s3_share.progress.click.progressbar')
+    @patch('aws_s3_share.progress.click.progressbar')
     def test_start_compression(self, mock_progressbar):
         """Test starting compression progress bar."""
         mock_bar = Mock()
@@ -105,7 +105,7 @@ class TestClickProgressReporter:
         mock_progressbar.assert_called_once_with(length=1000, label="Compressing")
         assert reporter._compression_bar == mock_bar
     
-    @patch('s3_share.progress.click.progressbar')
+    @patch('aws_s3_share.progress.click.progressbar')
     def test_start_compression_replaces_existing(self, mock_progressbar):
         """Test that starting compression finishes existing bar."""
         old_bar = Mock()
@@ -181,7 +181,7 @@ class TestClickProgressReporter:
         mock_bar.finish.assert_called_once()
         assert reporter._compression_bar is None
     
-    @patch('s3_share.progress.click.progressbar')
+    @patch('aws_s3_share.progress.click.progressbar')
     def test_start_upload(self, mock_progressbar):
         """Test starting upload progress bar."""
         mock_bar = Mock()
@@ -194,7 +194,7 @@ class TestClickProgressReporter:
         assert reporter._upload_bar == mock_bar
         mock_bar.update.assert_not_called()
     
-    @patch('s3_share.progress.click.progressbar')
+    @patch('aws_s3_share.progress.click.progressbar')
     def test_start_upload_with_initial_bytes(self, mock_progressbar):
         """Test starting upload progress bar with initial bytes."""
         mock_bar = Mock()
@@ -207,7 +207,7 @@ class TestClickProgressReporter:
         mock_bar.update.assert_called_once_with(1000)
         assert reporter._upload_bar == mock_bar
     
-    @patch('s3_share.progress.click.progressbar')
+    @patch('aws_s3_share.progress.click.progressbar')
     def test_start_upload_with_zero_initial_bytes(self, mock_progressbar):
         """Test starting upload with explicitly zero initial bytes."""
         mock_bar = Mock()
@@ -220,7 +220,7 @@ class TestClickProgressReporter:
         mock_bar.update.assert_not_called()
         assert reporter._upload_bar == mock_bar
     
-    @patch('s3_share.progress.click.progressbar')
+    @patch('aws_s3_share.progress.click.progressbar')
     def test_start_upload_replaces_existing(self, mock_progressbar):
         """Test that starting upload finishes existing bar."""
         old_bar = Mock()
@@ -349,7 +349,7 @@ class TestClickProgressReporter:
         
         assert len(exceptions) == 0  # Should not raise exception
     
-    @patch('s3_share.progress.click.progressbar')
+    @patch('aws_s3_share.progress.click.progressbar')
     def test_concurrent_compression_and_upload(self, mock_progressbar):
         """Test concurrent compression and upload operations."""
         compression_bar = Mock()
@@ -409,7 +409,7 @@ class TestClickProgressReporter:
         
         nested_operation()
     
-    @patch('s3_share.progress.click.progressbar')
+    @patch('aws_s3_share.progress.click.progressbar')
     def test_full_workflow(self, mock_progressbar):
         """Test a complete compression and upload workflow."""
         compression_bar = Mock()

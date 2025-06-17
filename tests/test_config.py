@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from s3_share.config import (
+from aws_s3_share.config import (
     S3ShareConfig,
     get_config_path,
     validate_config,
@@ -17,7 +17,7 @@ from s3_share.config import (
     MIN_EXPIRY_SECONDS,
     POSIX_CONFIG_SUBDIR,
 )
-from s3_share.errors import (
+from aws_s3_share.errors import (
     ConfigFileNotFoundError,
     ConfigFormatError,
     ConfigPermissionError,
@@ -29,7 +29,7 @@ class TestGetConfigPath:
     """Tests for the get_config_path function."""
 
     @patch("os.name", "nt")  # Windows
-    @patch("s3_share.config.Path")
+    @patch("aws_s3_share.config.Path")
     def test_windows_with_appdata(self, mock_config_path):
         """Test Windows path with APPDATA environment variable."""
         mock_config_path_windows = Mock()
@@ -43,7 +43,7 @@ class TestGetConfigPath:
         assert path == mock_config_path
 
     @patch("os.name", "nt")  # Windows
-    @patch("s3_share.config.Path")
+    @patch("aws_s3_share.config.Path")
     def test_windows_without_appdata(self, mock_config_path):
         """Test Windows path without APPDATA environment variable."""
         mock_home_path = Mock()
@@ -66,7 +66,7 @@ class TestGetConfigPath:
         assert path == mock_final_path
 
     @patch("os.name", "nt")  # Windows
-    @patch("s3_share.config.Path")
+    @patch("aws_s3_share.config.Path")
     def test_windows_with_empty_appdata(self, mock_config_path):
         """Test Windows path with empty APPDATA environment variable."""
         mock_home_path = Mock()
@@ -89,7 +89,7 @@ class TestGetConfigPath:
         assert path == mock_final_path
 
     @patch("os.name", "posix")  # POSIX (Linux/macOS)
-    @patch("s3_share.config.Path")
+    @patch("aws_s3_share.config.Path")
     def test_posix_path(self, mock_path_class):
         """Test POSIX path configuration."""
         mock_home_path = Mock()
@@ -277,9 +277,9 @@ class TestVerifyAndBuildConfig:
         mock_path = Mock(spec=Path)
         return mock_path
 
-    @patch("s3_share.config.validate_and_resolve_input_path")
-    @patch("s3_share.config.read_config_file")
-    @patch("s3_share.config.get_config_path")
+    @patch("aws_s3_share.config.validate_and_resolve_input_path")
+    @patch("aws_s3_share.config.read_config_file")
+    @patch("aws_s3_share.config.get_config_path")
     def test_build_config_with_all_args(self, mock_get_config_path, mock_read_config, mock_validate_path):
         """Test building config with all command line arguments provided."""
         mock_resolved_path = Path("/resolved/test/path")
@@ -299,9 +299,9 @@ class TestVerifyAndBuildConfig:
         assert config["expiry"] == expiry
         assert config["profile"] == profile
 
-    @patch("s3_share.config.validate_and_resolve_input_path")
-    @patch("s3_share.config.read_config_file")
-    @patch("s3_share.config.get_config_path")
+    @patch("aws_s3_share.config.validate_and_resolve_input_path")
+    @patch("aws_s3_share.config.read_config_file")
+    @patch("aws_s3_share.config.get_config_path")
     def test_build_config_with_file_fallback(self, mock_get_config_path, mock_read_config, mock_validate_path):
         """Test building config with fallback to config file values."""
         mock_resolved_path = Path("/resolved/test/path")
@@ -322,9 +322,9 @@ class TestVerifyAndBuildConfig:
         assert config["expiry"] == 5400
         assert config["profile"] == "file-profile"
 
-    @patch("s3_share.config.validate_and_resolve_input_path")
-    @patch("s3_share.config.read_config_file")
-    @patch("s3_share.config.get_config_path")
+    @patch("aws_s3_share.config.validate_and_resolve_input_path")
+    @patch("aws_s3_share.config.read_config_file")
+    @patch("aws_s3_share.config.get_config_path")
     def test_build_config_with_defaults(self, mock_get_config_path, mock_read_config, mock_validate_path):
         """Test building config with default values when file doesn't exist."""
         mock_resolved_path = Path("/resolved/test/path")
@@ -342,9 +342,9 @@ class TestVerifyAndBuildConfig:
         assert config["expiry"] == DEFAULT_EXPIRY_SECONDS
         assert config["profile"] is None
 
-    @patch("s3_share.config.validate_and_resolve_input_path")
-    @patch("s3_share.config.read_config_file")
-    @patch("s3_share.config.get_config_path")
+    @patch("aws_s3_share.config.validate_and_resolve_input_path")
+    @patch("aws_s3_share.config.read_config_file")
+    @patch("aws_s3_share.config.get_config_path")
     def test_build_config_cli_overrides_file(self, mock_get_config_path, mock_read_config, mock_validate_path):
         """Test that CLI arguments override config file values."""
         mock_resolved_path = Path("/resolved/test/path")
@@ -367,9 +367,9 @@ class TestVerifyAndBuildConfig:
         assert config["expiry"] == cli_expiry
         assert config["profile"] == cli_profile
 
-    @patch("s3_share.config.validate_and_resolve_input_path")
-    @patch("s3_share.config.read_config_file")
-    @patch("s3_share.config.get_config_path")
+    @patch("aws_s3_share.config.validate_and_resolve_input_path")
+    @patch("aws_s3_share.config.read_config_file")
+    @patch("aws_s3_share.config.get_config_path")
     def test_build_config_permission_error_propagated(self, mock_get_config_path, mock_read_config, mock_validate_path):
         """Test that config file permission errors are propagated."""
         mock_validate_path.return_value = Path("/resolved/path")
@@ -379,9 +379,9 @@ class TestVerifyAndBuildConfig:
         with pytest.raises(ConfigPermissionError, match="Permission denied"):
             verify_and_build_config(Path("/test/path"), "bucket", 3600, None)
 
-    @patch("s3_share.config.validate_and_resolve_input_path")
-    @patch("s3_share.config.read_config_file")
-    @patch("s3_share.config.get_config_path")
+    @patch("aws_s3_share.config.validate_and_resolve_input_path")
+    @patch("aws_s3_share.config.read_config_file")
+    @patch("aws_s3_share.config.get_config_path")
     def test_build_config_format_error_propagated(self, mock_get_config_path, mock_read_config, mock_validate_path):
         """Test that config file format errors are propagated."""
         mock_validate_path.return_value = Path("/resolved/path")
@@ -391,9 +391,9 @@ class TestVerifyAndBuildConfig:
         with pytest.raises(ConfigFormatError, match="Invalid TOML"):
             verify_and_build_config(Path("/test/path"), "bucket", 3600, None)
 
-    @patch("s3_share.config.validate_and_resolve_input_path")
-    @patch("s3_share.config.read_config_file")
-    @patch("s3_share.config.get_config_path")
+    @patch("aws_s3_share.config.validate_and_resolve_input_path")
+    @patch("aws_s3_share.config.read_config_file")
+    @patch("aws_s3_share.config.get_config_path")
     def test_build_config_validation_error(self, mock_get_config_path, mock_read_config, mock_validate_path):
         """Test that config validation errors are raised."""
         mock_validate_path.return_value = Path("/resolved/path")
@@ -403,9 +403,9 @@ class TestVerifyAndBuildConfig:
         with pytest.raises(ConfigFormatError, match="Please provide the 'bucket' option"):
             verify_and_build_config(Path("/test/path"), None, 3600, None)
 
-    @patch("s3_share.config.validate_and_resolve_input_path")
-    @patch("s3_share.config.read_config_file")
-    @patch("s3_share.config.get_config_path")
+    @patch("aws_s3_share.config.validate_and_resolve_input_path")
+    @patch("aws_s3_share.config.read_config_file")
+    @patch("aws_s3_share.config.get_config_path")
     def test_build_config_input_path_validation_error(self, mock_get_config_path, mock_read_config, mock_validate_path):
         """Test that input path validation errors are propagated."""
         mock_validate_path.side_effect = InputPathValidationError("Invalid path")
@@ -415,9 +415,9 @@ class TestVerifyAndBuildConfig:
         with pytest.raises(InputPathValidationError, match="Invalid path"):
             verify_and_build_config(Path("/invalid/path"), "bucket", 3600, None)
 
-    @patch("s3_share.config.validate_and_resolve_input_path")
-    @patch("s3_share.config.read_config_file")
-    @patch("s3_share.config.get_config_path")
+    @patch("aws_s3_share.config.validate_and_resolve_input_path")
+    @patch("aws_s3_share.config.read_config_file")
+    @patch("aws_s3_share.config.get_config_path")
     def test_expiry_precedence_logic(self, mock_get_config_path, mock_read_config, mock_validate_path):
         """Test the complex expiry precedence logic."""
         mock_validate_path.return_value = Path("/resolved/path")

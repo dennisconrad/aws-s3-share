@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING
 import boto3
 from botocore.exceptions import ClientError, ProfileNotFound
 from botocore.client import Config
-from s3_share.compress import Compressor, GzipCompressor, TarGzipCompressor
-from s3_share.errors import AWSClientProfileNotFoundError, InputPathValidationError, S3PresignedURLError
+from aws_s3_share.compress import Compressor, GzipCompressor, TarGzipCompressor
+from aws_s3_share.errors import AWSClientProfileNotFoundError, InputPathValidationError, S3PresignedURLError
 import random
 import string
 

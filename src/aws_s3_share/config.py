@@ -4,12 +4,12 @@ except ImportError:
     from tomli import load as toml_load, TOMLDecodeError  # Fallback to external tomli for earlier Python versions
 
 from typing import TypedDict
-from s3_share.errors import ConfigFileNotFoundError, ConfigFormatError, ConfigPermissionError
+from aws_s3_share.errors import ConfigFileNotFoundError, ConfigFormatError, ConfigPermissionError
 from pathlib import Path
 import os
-from s3_share.util import validate_and_resolve_input_path
+from aws_s3_share.util import validate_and_resolve_input_path
 
-CONFIG_FILE_NAME = "s3-share.toml"
+CONFIG_FILE_NAME = "aws-s3-share.toml"
 MIN_EXPIRY_SECONDS = 1
 MAX_EXPIRY_SECONDS = 604_800  # 7 days
 DEFAULT_EXPIRY_SECONDS = 3_600  # 1 hour
@@ -27,11 +27,11 @@ class S3ShareConfig(TypedDict):
 
 def get_config_path() -> Path:
     """
-    Returns the platform-specific path for the s3-share configuration file.
+    Returns the platform-specific path for the aws-s3-share configuration file.
 
     On Windows, it tries to use the %APPDATA% environment variable.  If not set
-    or empty, it defaults to %USERPROFILE%\\AppData\\Roaming\\s3-share.toml.
-    On POSIX systems (Linux, macOS, etc.), it uses $HOME/.config/s3-share.toml.
+    or empty, it defaults to %USERPROFILE%\\AppData\\Roaming\\aws-s3-share.toml.
+    On POSIX systems (Linux, macOS, etc.), it uses $HOME/.config/aws-s3-share.toml.
 
     Returns:
         Path: The absolute path to the configuration file.

@@ -1,6 +1,6 @@
 [project]
-name = "s3-share"
-version = "0.1.1"
+name = "aws-s3-share"
+version = "0.1.2"
 description = "CLI tool for sharing files via Amazon S3 with presigned URLs"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -32,10 +32,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/dennisconrad/s3-share"
-Issues = "https://github.com/dennisconrad/s3-share/issues"
-Documentation = "https://github.com/dennisconrad/s3-share#readme"
-Source = "https://github.com/dennisconrad/s3-share"
+Homepage = "https://github.com/dennisconrad/aws-s3-share"
+Issues = "https://github.com/dennisconrad/aws-s3-share/issues"
+Documentation = "https://github.com/dennisconrad/aws-s3-share#readme"
+Source = "https://github.com/dennisconrad/aws-s3-share"
 
 
 
@@ -51,7 +51,7 @@ dev = [
 ]
 
 [project.scripts]
-s3-share = "s3_share.cli:main"
+aws-s3-share = "aws_s3_share.cli:main"
 
 [tool.uv]
 python-downloads = "automatic"
@@ -63,7 +63,7 @@ build-backend = "uv_build"
 
 [tool.pytest.ini_options]
 addopts = [
-    "--cov=s3_share",
+    "--cov=aws_s3_share",
     "--cov-report=term-missing",
 ]
 testpaths = ["tests/"]

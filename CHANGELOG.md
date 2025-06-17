@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Fix PyPI Classifiers
 
-[Unreleased]: https://github.com/dennisconrad/s3-share/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/dennisconrad/s3-share/releases/tag/v0.1.0
-[0.1.1]: https://github.com/dennisconrad/s3-share/releases/tag/v0.1.1
+## [0.1.2] - 2025-06-17
+
+### Added
+- Rename to aws-s3-share due to PyPI naming conflict
+
+[Unreleased]: https://github.com/dennisconrad/aws-s3-share/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/dennisconrad/aws-s3-share/releases/tag/v0.1.0
+[0.1.1]: https://github.com/dennisconrad/aws-s3-share/releases/tag/v0.1.1
+[0.1.2]: https://github.com/dennisconrad/aws-s3-share/releases/tag/v0.1.2

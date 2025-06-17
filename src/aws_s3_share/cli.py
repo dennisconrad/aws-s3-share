@@ -3,17 +3,17 @@ from pathlib import Path
 
 import click
 
-from s3_share.coordinator import Coordinator
-from s3_share.progress import ClickProgressReporter
-from s3_share.upload import S3Uploader
-from s3_share.config import verify_and_build_config, DEFAULT_EXPIRY_SECONDS
-from s3_share.errors import (
+from aws_s3_share.coordinator import Coordinator
+from aws_s3_share.progress import ClickProgressReporter
+from aws_s3_share.upload import S3Uploader
+from aws_s3_share.config import verify_and_build_config, DEFAULT_EXPIRY_SECONDS
+from aws_s3_share.errors import (
     ConfigFileNotFoundError,
     ConfigFormatError,
     ConfigPermissionError,
     AWSClientProfileNotFoundError,
 )
-from s3_share.util import generate_s3_presigned_url, generate_random_prefix, get_compressor_for_path, get_s3_client
+from aws_s3_share.util import generate_s3_presigned_url, generate_random_prefix, get_compressor_for_path, get_s3_client
 
 
 def get_object_key(input_path: Path, file_extension: str) -> str:
@@ -43,7 +43,7 @@ def get_object_key(input_path: Path, file_extension: str) -> str:
 )
 @click.option("-p", "--profile", type=str, help="AWS profile name to use for authentication")
 @click.help_option("-h", "--help", help="Show this message and exit")
-@click.version_option(package_name="s3-share", prog_name="s3-share")
+@click.version_option(package_name="aws-s3-share", prog_name="aws-s3-share")
 def main(path: Path, bucket: str | None, expiry: int, profile: str | None) -> None:
     try:
         # Build configuration

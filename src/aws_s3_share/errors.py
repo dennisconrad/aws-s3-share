@@ -1,5 +1,5 @@
 class S3ShareError(Exception):
-    """Base exception for all s3-share errors."""
+    """Base exception for all aws-s3-share errors."""
 
     pass
 

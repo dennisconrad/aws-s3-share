@@ -2,8 +2,8 @@ import pytest
 from unittest.mock import Mock, patch, MagicMock
 from botocore.exceptions import ClientError, BotoCoreError
 
-from s3_share.upload import Uploader, S3Uploader, S3UploadPartResponse
-from s3_share.errors import S3UploadMultipartError
+from aws_s3_share.upload import Uploader, S3Uploader, S3UploadPartResponse
+from aws_s3_share.errors import S3UploadMultipartError
 
 
 class MockUploader(Uploader):

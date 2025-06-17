@@ -7,8 +7,8 @@ import tarfile
 import threading
 from typing import IO
 
-from s3_share.errors import CompressorCalculateTotalSizeError, CompressorInputPathError
-from s3_share.progress import ProgressReporter
+from aws_s3_share.errors import CompressorCalculateTotalSizeError, CompressorInputPathError
+from aws_s3_share.progress import ProgressReporter
 
 
 DEFAULT_CHUNK_SIZE = 5 * 1024 * 1024  # 5MB (AWS minimum multipart size)

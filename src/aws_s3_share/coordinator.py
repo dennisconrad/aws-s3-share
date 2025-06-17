@@ -4,10 +4,10 @@ import queue
 import threading
 from typing import Iterator
 
-from s3_share.compress import DEFAULT_CHUNK_SIZE, ChunkWriter, Compressor
-from s3_share.errors import S3UploadMultipartError
-from s3_share.progress import ProgressReporter
-from s3_share.upload import S3UploadPartResponse, Uploader
+from aws_s3_share.compress import DEFAULT_CHUNK_SIZE, ChunkWriter, Compressor
+from aws_s3_share.errors import S3UploadMultipartError
+from aws_s3_share.progress import ProgressReporter
+from aws_s3_share.upload import S3UploadPartResponse, Uploader
 
 
 class Coordinator:
